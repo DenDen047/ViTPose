@@ -1,4 +1,4 @@
-<h1 align="left">ViTPose: Simple Vision Transformer Baselines for Human Pose Estimation<a href="https://arxiv.org/abs/2204.12484"><img src="https://img.shields.io/badge/arXiv-Paper-<COLOR>.svg" ></a> </h1> 
+<h1 align="left">ViTPose: Simple Vision Transformer Baselines for Human Pose Estimation<a href="https://arxiv.org/abs/2204.12484"><img src="https://img.shields.io/badge/arXiv-Paper-<COLOR>.svg" ></a> </h1>
 
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/vitpose-simple-vision-transformer-baselines/pose-estimation-on-coco-test-dev)](https://paperswithcode.com/sota/pose-estimation-on-coco-test-dev?p=vitpose-simple-vision-transformer-baselines)
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/vitpose-simple-vision-transformer-baselines/pose-estimation-on-aic)](https://paperswithcode.com/sota/pose-estimation-on-aic?p=vitpose-simple-vision-transformer-baselines)
@@ -30,7 +30,7 @@ This branch contains the pytorch implementation of <a href="https://arxiv.org/ab
 
 ## MAE Pre-trained model
 
-- The small size MAE pre-trained model can be found in [Onedrive](https://1drv.ms/u/s!AimBgYV7JjTlgccZeiFjh4DJ7gjYyg?e=iTMdMq). 
+- The small size MAE pre-trained model can be found in [Onedrive](https://1drv.ms/u/s!AimBgYV7JjTlgccZeiFjh4DJ7gjYyg?e=iTMdMq).
 - The base, large, and huge pre-trained models using MAE can be found in the [MAE official repo](https://github.com/facebookresearch/mae).
 
 ## Results from this repo on MS COCO val set (single-task training)
@@ -191,7 +191,7 @@ Using YOLOv3 human detector. Note the configs here are only for evaluation.
 
 > [2022-05-06] Upload the logs for the base, large, and huge models!
 
-> [2022-04-27] Our ViTPose with ViTAE-G obtains 81.1 AP on COCO test-dev set! 
+> [2022-04-27] Our ViTPose with ViTAE-G obtains 81.1 AP on COCO test-dev set!
 
 > Applications of ViTAE Transformer include: [image classification](https://github.com/ViTAE-Transformer/ViTAE-Transformer/tree/main/Image-Classification) | [object detection](https://github.com/ViTAE-Transformer/ViTAE-Transformer/tree/main/Object-Detection) | [semantic segmentation](https://github.com/ViTAE-Transformer/ViTAE-Transformer/tree/main/Semantic-Segmentation) | [animal pose segmentation](https://github.com/ViTAE-Transformer/ViTAE-Transformer/tree/main/Animal-Pose-Estimation) | [remote sensing](https://github.com/ViTAE-Transformer/ViTAE-Transformer-Remote-Sensing) | [matting](https://github.com/ViTAE-Transformer/ViTAE-Transformer-Matting) | [VSA](https://github.com/ViTAE-Transformer/ViTAE-VSA) | [ViTDet](https://github.com/ViTAE-Transformer/ViTDet)
 
@@ -224,7 +224,7 @@ bash tools/dist_train.sh <Config PATH> <NUM GPUs> --cfg-options model.pretrained
 python -m torch.distributed.launch --nnodes <Num Machines> --node_rank <Rank of Machine> --nproc_per_node <GPUs Per Machine> --master_addr <Master Addr> --master_port <Master Port> tools/train.py <Config PATH> --cfg-options model.pretrained=<Pretrained PATH> --launcher pytorch --seed 0
 ```
 
-To test the pretrained models performance, please run 
+To test the pretrained models performance, please run
 
 ```bash
 bash tools/dist_test.sh <Config PATH> <Checkpoint PATH> <NUM GPUs>
@@ -234,6 +234,16 @@ For ViTPose+ pre-trained models, please first re-organize the pre-trained weight
 
 ```bash
 python tools/model_split.py --source <Pretrained PATH>
+```
+
+### Docker setup
+
+```bash
+cd docker
+docker build -t denden047/vitpose .
+docker run -it --rm --gpus 0 \
+  -v /data/naoya/ViTPose:/data \
+  denden047/vitpose /bin/bash
 ```
 
 ## Todo
