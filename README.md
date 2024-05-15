@@ -242,8 +242,21 @@ python tools/model_split.py --source <Pretrained PATH>
 cd docker
 docker build -t denden047/vitpose .
 docker run -it --rm --gpus 0 \
-  -v /data/naoya/ViTPose:/data \
-  denden047/vitpose /bin/bash
+    -v ${HOME}/Projects/ViTPose:/workspace \
+    -v /data/naoya/smalr_lidar:/smal_data \
+    -v /data/naoya/ViTPose:/data \
+    denden047/vitpose /bin/bash
+```
+
+In the container shell,
+```bash
+cd /workspace
+python -c 'import mmcv;print(mmcv.__version__)'
+python -c 'import mmdet;print(mmdet.__version__)'
+python tools/predict.py \
+    --config configs/animal/2d_kpt_sview_rgb_img/topdown_heatmap/apt36k/ViTPose_huge_apt36k_256x192.py \
+    --checkpoint /data/vitpose+_huge/apt36k.pth \
+    --image /data/ap-10k/data/000000037843.jpg
 ```
 
 ## Todo
